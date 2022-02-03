@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Input, Button } from './shared/Form';
+import { Input, Button } from './shared/Form.jsx';
 
 const SearchForm = styled.div`
   display: flex;
@@ -18,3 +18,4 @@ const Search = ({ inputVal, onChange, onSearch }) => (
 );
 
 export default Search;
+//! currently have 2 search remove one

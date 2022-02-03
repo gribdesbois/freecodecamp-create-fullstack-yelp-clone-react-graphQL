@@ -1,35 +1,34 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useQuery, gql } from '@apollo/client'
-import { List, ListItem } from './shared/List'
+import { Link } from 'react-router-dom'
+import { List, ListItemWithLink } from './shared/List'
 import { Badge } from './shared/Badge'
 
 const PLANETS = gql`
-{
-  planets {
-    id
-    name
-    cuisine
+  {
+    planets {
+      id
+      name
+      cuisine
+    }
   }
-}
-`
+`;
 
-function Planets({ newPlanets }) {
+const Planets = ({ newPlanets }) => {
   const { loading, error, data } = useQuery(PLANETS)
 
   const renderPlanets = (planets) => planets.map(({ id, name, cuisine }) => (
-    <ListItem key={id}>
-      {name} <Badge>{cuisine}</Badge>
-    </ListItem>
+    <ListItemWithLink key={id}>
+      <Link to={`/planet/${id}`}>
+        {name} <Badge>{cuisine}</Badge>
+      </Link>
+    </ListItemWithLink>
   ))
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error : (</p>
+  if (loading) return <p>Loading ...</p>
+  if (error) return <p>Error :(</p>
 
-  return (
-    <List>
-      {renderPlanets(newPlanets || data.planets)}
-    </List>
-  )
+  return <List>{renderPlanets(newPlanets || data.planets)}</List>
 }
 
 export default Planets

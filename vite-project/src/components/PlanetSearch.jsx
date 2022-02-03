@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLazyQuery, gql } from '@apollo/client'
-import Search from './Search'
+import Search from './Search.jsx'
 import Planets from './Planets'
 
 const SEARCH = gql`
@@ -11,7 +11,7 @@ const SEARCH = gql`
       id
     }
   }
-`
+`;
 
 const PlanetSearch = () => {
   const [inputVal, setInputVal] = useState('')
